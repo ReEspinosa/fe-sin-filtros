@@ -211,10 +211,17 @@
     <div class="space-y-5">
       <p class="section-label">✦ asistente bíblico</p>
       <h2 class="font-display text-4xl text-brown">¿Tienes preguntas?</h2>
-      <p class="text-lg text-brown-mid leading-relaxed">
-        Nuestro asistente virtual está disponible 24/7 — responde con la Biblia
-        y escritos de Elena G. de White. Sin juicios, solo respuestas.
-      </p>
+        <p class="text-lg text-brown-mid leading-relaxed">
+            Nuestro asistente virtual está disponible 24/7 — responde con la Biblia
+            y escritos de Elena G. de White. Sin juicios, solo respuestas.
+        </p>
+        <button onclick="openChat()"
+                style="margin-top:20px;display:inline-flex;align-items:center;gap:10px;background:var(--primary-c);color:white;border:none;padding:14px 28px;border-radius:999px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:all .3s;"
+                onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 10px 28px rgba(148,74,32,.3)'"
+                onmouseout="this.style.transform='';this.style.boxShadow=''">
+            <span class="material-symbols-outlined">chat</span>
+            Hablar con Luz →
+        </button>
     </div>
 
     <!-- chat UI -->
@@ -350,6 +357,65 @@
   <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
   Quiero estudiar la Biblia
 </a>
+<!-- ══ MODAL CHAT FULLSCREEN ══ -->
+<div id="chat-modal" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(34,26,15,.55);backdrop-filter:blur(8px);" onclick="if(event.target===this)closeChat()">
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;max-width:780px;width:100%;margin:0 auto;padding:16px;">
+        <div style="background:var(--cream);border-radius:2rem;display:flex;flex-direction:column;height:100%;overflow:hidden;box-shadow:0 32px 80px rgba(34,26,15,.25);">
+
+            <!-- header -->
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--cream-dark);flex-shrink:0;">
+                <div style="display:flex;align-items:center;gap:12px;">
+                    <div style="width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--primary-c),var(--rose));display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">✦</div>
+                    <div>
+                        <p style="font-family:'Playfair Display',serif;font-size:19px;color:var(--brown);font-weight:700;margin:0;">Luz</p>
+                        <div style="display:flex;align-items:center;gap:6px;margin-top:2px;">
+                            <span style="width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block;"></span>
+                            <span style="font-size:12px;color:var(--brown-mid);">Asistente bíblico · en línea</span>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="closeChat()" style="width:38px;height:38px;border-radius:50%;border:none;background:var(--cream-dark);cursor:pointer;display:flex;align-items:center;justify-content:center;" onmouseover="this.style.background='var(--cream-mid)'" onmouseout="this.style.background='var(--cream-dark)'">
+                    <span class="material-symbols-outlined" style="font-size:20px;color:var(--brown-mid);">close</span>
+                </button>
+            </div>
+
+            <!-- mensajes -->
+            <div id="modal-messages" style="flex:1;overflow-y:auto;padding:24px;display:flex;flex-direction:column;gap:16px;scroll-behavior:smooth;">
+                <div style="display:flex;align-items:flex-start;gap:10px;">
+                    <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--primary-c),var(--rose));display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">✦</div>
+                    <div style="max-width:85%;">
+                        <div style="background:var(--cream-mid);color:var(--brown);padding:14px 18px;border-radius:1.5rem 1.5rem 1.5rem 0.25rem;font-size:15px;line-height:1.65;">
+                            ¡Hola! Soy <strong>Luz</strong> ✦ Estoy aquí para ayudarte con cualquier pregunta sobre la Biblia o la fe. ¿Qué tienes en mente?
+                        </div>
+                        <span style="font-size:11px;color:var(--brown-mid);margin-top:5px;margin-left:10px;display:block;">Luz • ahora</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- sugerencias -->
+            <div id="modal-suggestions" style="padding:0 24px 12px;display:flex;gap:8px;flex-wrap:wrap;flex-shrink:0;">
+                <button onclick="sendSuggestion('¿Qué es el sábado?')" style="padding:7px 14px;border-radius:999px;border:1.5px solid var(--cream-dark);background:white;font-size:12px;color:var(--brown-mid);cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .2s;" onmouseover="this.style.borderColor='var(--primary-c)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='var(--cream-dark)';this.style.color='var(--brown-mid)'">¿Qué es el sábado?</button>
+                <button onclick="sendSuggestion('¿Qué pasa después de morir?')" style="padding:7px 14px;border-radius:999px;border:1.5px solid var(--cream-dark);background:white;font-size:12px;color:var(--brown-mid);cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .2s;" onmouseover="this.style.borderColor='var(--primary-c)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='var(--cream-dark)';this.style.color='var(--brown-mid)'">¿Qué pasa después de morir?</button>
+                <button onclick="sendSuggestion('¿Por qué hay sufrimiento?')" style="padding:7px 14px;border-radius:999px;border:1.5px solid var(--cream-dark);background:white;font-size:12px;color:var(--brown-mid);cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .2s;" onmouseover="this.style.borderColor='var(--primary-c)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='var(--cream-dark)';this.style.color='var(--brown-mid)'">¿Por qué hay sufrimiento?</button>
+                <button onclick="sendSuggestion('¿Cómo orar mejor?')" style="padding:7px 14px;border-radius:999px;border:1.5px solid var(--cream-dark);background:white;font-size:12px;color:var(--brown-mid);cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .2s;" onmouseover="this.style.borderColor='var(--primary-c)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='var(--cream-dark)';this.style.color='var(--brown-mid)'">¿Cómo orar mejor?</button>
+            </div>
+
+            <!-- input -->
+            <div style="padding:16px 24px 20px;border-top:1px solid var(--cream-dark);display:flex;gap:10px;align-items:flex-end;flex-shrink:0;">
+        <textarea id="modal-input" placeholder="Escribe tu pregunta..." rows="1"
+                  onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendModalChat();}"
+                  oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,120)+'px'"
+                  style="flex:1;background:var(--cream-mid);border:1.5px solid var(--cream-dark);border-radius:1.2rem;padding:12px 16px;font-size:15px;font-family:'Plus Jakarta Sans',sans-serif;color:var(--brown);outline:none;resize:none;line-height:1.5;transition:border-color .2s;max-height:120px;"
+                  onfocus="this.style.borderColor='var(--primary-c)'"
+                  onblur="this.style.borderColor='var(--cream-dark)'"></textarea>
+                <button onclick="sendModalChat()" style="width:48px;height:48px;border-radius:50%;background:var(--primary-c);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:white;flex-shrink:0;transition:all .25s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+                    <span class="material-symbols-outlined" style="font-size:22px;">arrow_upward</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <script src="config.js"></script>
 <script>
@@ -465,76 +531,8 @@ document.getElementById('footer-social').innerHTML = Object.entries(CONFIG.socia
   .map(([k,url]) => `<a href="${url}" target="_blank" rel="noopener"
       class="text-brown-mid hover:text-primary transition-colors" title="${k}">${socialIcons[k]||''}</a>`).join('');
 
-// historial de conversación
-let chatHistory = [];
 
-function sendChat() {
-  const input   = document.getElementById('chat-input');
-  const msg     = input.value.trim();
-  if (!msg) return;
-
-  const box = document.getElementById('chat-messages');
-
-  // mensaje del usuario
-  box.innerHTML += `
-    <div style="display:flex;justify-content:flex-end;">
-      <div style="max-width:85%;">
-        <div style="background:var(--primary-c);color:white;padding:12px 16px;border-radius:1.2rem 1.2rem 0.25rem 1.2rem;font-size:14px;line-height:1.5;">${msg}</div>
-      </div>
-    </div>`;
-  input.value = '';
-  box.scrollTop = box.scrollHeight;
-
-  // typing indicator
-  const typingId = 'typing-' + Date.now();
-  box.innerHTML += `
-    <div id="${typingId}" style="display:flex;align-items:flex-end;gap:8px;">
-      <div style="background:var(--cream-mid);padding:12px 16px;border-radius:1.2rem 1.2rem 1.2rem 0.25rem;display:flex;gap:4px;align-items:center;">
-        <span style="width:7px;height:7px;border-radius:50%;background:var(--brown-mid);animation:blink 1s infinite;"></span>
-        <span style="width:7px;height:7px;border-radius:50%;background:var(--brown-mid);animation:blink 1s .2s infinite;"></span>
-        <span style="width:7px;height:7px;border-radius:50%;background:var(--brown-mid);animation:blink 1s .4s infinite;"></span>
-      </div>
-    </div>`;
-  box.scrollTop = box.scrollHeight;
-
-  // agrega al historial
-  chatHistory.push({ role: "user", content: msg });
-
-  // llama al backend
-  fetch('https://fe-sin-filtros-backend-production.up.railway.app/chat', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ messages: chatHistory })
-  })
-  .then(r => r.json())
-  .then(data => {
-    document.getElementById(typingId)?.remove();
-    const reply = data.reply || 'Lo siento, hubo un error. Intenta de nuevo.';
-
-    // agrega respuesta al historial
-    chatHistory.push({ role: "assistant", content: reply });
-
-    box.innerHTML += `
-      <div style="display:flex;align-items:flex-start;gap:8px;">
-        <div style="width:32px;height:32px;border-radius:50%;background:var(--cream-dark);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;">✦</div>
-        <div style="max-width:85%;">
-          <div style="background:var(--cream-mid);color:var(--brown);padding:12px 16px;border-radius:1.2rem 1.2rem 1.2rem 0.25rem;font-size:14px;line-height:1.6;">${reply.replace(/\n/g, '<br>')}</div>
-          <span style="font-size:11px;color:var(--brown-mid);margin-top:4px;margin-left:8px;display:block;">Luz • ahora</span>
-        </div>
-      </div>`;
-    box.scrollTop = box.scrollHeight;
-  })
-  .catch(() => {
-    document.getElementById(typingId)?.remove();
-    box.innerHTML += `
-      <div style="background:var(--cream-mid);padding:12px 16px;border-radius:1.2rem;font-size:13px;color:var(--brown-mid);max-width:85%;">
-        Sin conexión con el asistente. Asegúrate de que el servidor esté corriendo.
-      </div>`;
-    box.scrollTop = box.scrollHeight;
-  });
-}
-
-// Formulario
+   // Formulario
 function submitContact(e) {
   e.preventDefault();
   const name  = document.getElementById('cf-name').value.trim();
@@ -549,11 +547,90 @@ function submitContact(e) {
   document.getElementById('form-success').classList.remove('hidden');
 }
 
+// ── MODAL CHAT ───────────────────────────────
+let modalHistory = [];
+
+function openChat() {
+  document.getElementById('chat-modal').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('modal-input').focus(), 200);
+}
+function closeChat() {
+  document.getElementById('chat-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeChat(); });
+
+function sendSuggestion(text) {
+  document.getElementById('modal-suggestions').style.display = 'none';
+  document.getElementById('modal-input').value = text;
+  sendModalChat();
+}
+
+function sendModalChat() {
+  const input = document.getElementById('modal-input');
+  const msg   = input.value.trim();
+  if (!msg) return;
+  const box = document.getElementById('modal-messages');
+  document.getElementById('modal-suggestions').style.display = 'none';
+
+  box.innerHTML += `
+    <div style="display:flex;justify-content:flex-end;">
+      <div style="max-width:80%;">
+        <div style="background:var(--primary-c);color:white;padding:14px 18px;border-radius:1.5rem 1.5rem 0.25rem 1.5rem;font-size:15px;line-height:1.6;">${msg.replace(/\n/g,'<br>')}</div>
+      </div>
+    </div>`;
+  input.value = ''; input.style.height = 'auto';
+  box.scrollTop = box.scrollHeight;
+
+  const tid = 't' + Date.now();
+  box.innerHTML += `
+    <div id="${tid}" style="display:flex;align-items:flex-start;gap:10px;">
+      <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--primary-c),var(--rose));display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">✦</div>
+      <div style="background:var(--cream-mid);padding:14px 18px;border-radius:1.5rem 1.5rem 1.5rem 0.25rem;display:flex;gap:5px;align-items:center;">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--brown-mid);animation:blink 1s infinite;display:inline-block;"></span>
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--brown-mid);animation:blink 1s .2s infinite;display:inline-block;"></span>
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--brown-mid);animation:blink 1s .4s infinite;display:inline-block;"></span>
+      </div>
+    </div>`;
+  box.scrollTop = box.scrollHeight;
+  modalHistory.push({ role: 'user', content: msg });
+
+  fetch('https://fe-sin-filtros-backend-production.up.railway.app/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ messages: modalHistory })
+  })
+  .then(r => r.json())
+  .then(data => {
+    document.getElementById(tid)?.remove();
+    const reply = data.reply || 'Hubo un error, intenta de nuevo.';
+    modalHistory.push({ role: 'assistant', content: reply });
+    box.innerHTML += `
+      <div style="display:flex;align-items:flex-start;gap:10px;">
+        <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--primary-c),var(--rose));display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">✦</div>
+        <div style="max-width:82%;">
+          <div style="background:var(--cream-mid);color:var(--brown);padding:14px 18px;border-radius:1.5rem 1.5rem 1.5rem 0.25rem;font-size:15px;line-height:1.65;">${reply.replace(/\n/g,'<br>')}</div>
+          <span style="font-size:11px;color:var(--brown-mid);margin-top:5px;margin-left:10px;display:block;">Luz • ahora</span>
+        </div>
+      </div>`;
+    box.scrollTop = box.scrollHeight;
+  })
+  .catch(() => {
+    document.getElementById(tid)?.remove();
+    box.innerHTML += `<div style="background:var(--cream-mid);padding:14px 18px;border-radius:1.5rem;font-size:14px;color:var(--brown-mid);">Sin conexión con Luz. Intenta más tarde.</div>`;
+    box.scrollTop = box.scrollHeight;
+  });
+}
+
+function sendChat() { sendModalChat(); }
+
 // Navbar scroll effect
 window.addEventListener('scroll', () => {
   document.getElementById('navbar').style.borderBottomColor =
     window.scrollY > 20 ? 'var(--cream-dark)' : 'transparent';
 });
+
 </script>
 </body>
 </html>
