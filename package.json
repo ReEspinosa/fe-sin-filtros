@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "./node_modules/.bin/tailwindcss -i ./src/input.css -o ./dist/output.css",
+    "build": "npm install && ./node_modules/.bin/tailwindcss -i ./src/input.css -o ./dist/output.css",
     "dev": "./node_modules/.bin/tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
   },
   "keywords": [],
