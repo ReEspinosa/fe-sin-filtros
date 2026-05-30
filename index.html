@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fe Sin Filtros</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="dist/output.css"/>
+
+  <!-- SVG Flores inline reutilizables -->
+  <style>
+    :root {
+      --cream: #fff8f3; --cream-mid: #fbecd9; --cream-dark: #efe0cd;
+      --brown: #221a0f; --brown-mid: #54433b;
+      --primary: #944a20; --primary-c: #e88d5d;
+      --secondary: #725187; --secondary-c: #e8c0ff;
+      --gold: #F2C044; --gold-dim: #cb9d21;
+      --rose: #e8a0b4;
+    }
+
+    /* color map para cards */
+    .bg-card-primary-c  { background: linear-gradient(135deg, #e88d5d22, #e88d5d44); }
+    .bg-card-gold       { background: linear-gradient(135deg, #F2C04422, #F2C04444); }
+    .bg-card-secondary-c{ background: linear-gradient(135deg, #e8c0ff22, #e8c0ff44); }
+    .bg-card-rose       { background: linear-gradient(135deg, #e8a0b422, #e8a0b444); }
+
+    /* chat bubble */
+    .bubble-in  { background: var(--cream-mid); border-radius: 1.2rem 1.2rem 1.2rem 0.25rem; }
+    .bubble-out { background: var(--primary-c); color: white; border-radius: 1.2rem 1.2rem 0.25rem 1.2rem; }
+
+    /* tag pill */
+    .pill {
+      display: inline-block; padding: 3px 12px; border-radius: 999px;
+      font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+    }
+    .pill-primary-c  { background: #e88d5d33; color: var(--primary); }
+    .pill-gold       { background: #F2C04433; color: var(--gold-dim); }
+    .pill-secondary-c{ background: #e8c0ff44; color: var(--secondary); }
+    .pill-rose       { background: #e8a0b433; color: #a0456a; }
+
+    /* floral deco */
+    .floral { position:absolute; pointer-events:none; z-index:0; }
+
+    @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50%       { opacity: 0.2; }
+    }
+
+  </style>
+</head>
+<body class="bg-cream text-brown overflow-x-hidden">
+
+<!-- ══ NAV ══ -->
+<nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300"
+     style="background:rgba(255,248,243,0.85);backdrop-filter:blur(12px);border-bottom:1px solid transparent;">
+  <div class="flex justify-between items-center px-6 md:px-16 py-4 max-w-7xl mx-auto">
+    <a href="index.html" class="font-display text-2xl text-primary italic" id="nav-site-name"></a>
+    <div class="hidden md:flex gap-8 items-center">
+      <a href="#videos"      class="nav-link">Videos</a>
+      <a href="#chat"        class="nav-link">Chat IA</a>
+      <a href="#quiz"        class="nav-link">¿Por dónde empiezo?</a>
+      <a href="#testimonios" class="nav-link">Testimonios</a>
+      <a href="#contacto"    class="nav-link">Contacto</a>
+      <a href="estudios.html" class="btn-primary text-sm px-5 py-2.5">Ver todos los estudios</a>
+    </div>
+    <button class="md:hidden text-primary" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+      <span class="material-symbols-outlined text-3xl">menu</span>
+    </button>
+  </div>
+  <!-- mobile menu -->
+  <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 flex flex-col gap-3 bg-cream border-t border-cream-dark">
+    <a href="#videos"       class="nav-link py-2">Videos</a>
+    <a href="#chat"         class="nav-link py-2">Chat IA</a>
+    <a href="#quiz"         class="nav-link py-2">¿Por dónde empiezo?</a>
+    <a href="#testimonios"  class="nav-link py-2">Testimonios</a>
+    <a href="#contacto"     class="nav-link py-2">Contacto</a>
+    <a href="estudios.html" class="btn-primary text-center mt-2">Ver estudios</a>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="min-h-screen flex items-center px-6 md:px-16 max-w-7xl mx-auto relative overflow-hidden pt-24 pb-16">
+
+  <!-- flores hero -->
+  <div class="floral float-a" style="top:-40px;right:-60px;opacity:.14;width:340px;"><!-- POPPY SVG --><svg viewBox="0 0 300 320" xmlns="http://www.w3.org/2000/svg"><g transform="translate(150,160)"><path d="M0,60 Q-18,30 -10,-20 Q0,-80 5,-140" stroke="#5a7a3a" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M-10,10 Q-60,-10 -55,-50 Q-20,-30 -10,10Z" fill="#7aaa55" opacity=".85"/><path d="M-5,-30 Q40,-55 42,-95 Q10,-65 -5,-30Z" fill="#8abb66" opacity=".75"/><ellipse cx="0" cy="-155" rx="28" ry="48" fill="#E88D5D" opacity=".9" transform="rotate(0)"/><ellipse cx="0" cy="-155" rx="28" ry="48" fill="#d4744a" opacity=".75" transform="rotate(45)"/><ellipse cx="0" cy="-155" rx="28" ry="48" fill="#E88D5D" opacity=".85" transform="rotate(90)"/><ellipse cx="0" cy="-155" rx="28" ry="48" fill="#c9623a" opacity=".7" transform="rotate(135)"/><ellipse cx="0" cy="-155" rx="28" ry="48" fill="#E88D5D" opacity=".9" transform="rotate(180)"/><ellipse cx="0" cy="-155" rx="28" ry="48" fill="#d4744a" opacity=".75" transform="rotate(225)"/><ellipse cx="0" cy="-155" rx="28" ry="48" fill="#E88D5D" opacity=".85" transform="rotate(270)"/><ellipse cx="0" cy="-155" rx="28" ry="48" fill="#c9623a" opacity=".7" transform="rotate(315)"/><circle cx="0" cy="-155" r="20" fill="#372f22"/><circle cx="0" cy="-155" r="10" fill="#594535"/><circle cx="-5" cy="-160" r="2.5" fill="#f9e2af" opacity=".8"/><circle cx="5" cy="-160" r="2" fill="#f9e2af" opacity=".7"/><circle cx="0" cy="-152" r="2" fill="#f9e2af" opacity=".8"/></g></svg></div>
+
+  <div class="floral float-b" style="bottom:40px;left:-30px;opacity:.12;width:240px;"><!-- DAISY SVG --><svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg"><g transform="translate(100,150)"><path d="M0,30 Q8,0 5,-60 Q0,-100 -3,-130" stroke="#5a7a3a" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M3,-40 Q45,-50 50,-85 Q15,-60 3,-40Z" fill="#8abb66" opacity=".8"/><ellipse cx="0" cy="-148" rx="14" ry="30" fill="#fff8f3" opacity=".95" transform="rotate(0)"/><ellipse cx="0" cy="-148" rx="14" ry="30" fill="#fbecd9" opacity=".9" transform="rotate(30)"/><ellipse cx="0" cy="-148" rx="14" ry="30" fill="#fff8f3" opacity=".95" transform="rotate(60)"/><ellipse cx="0" cy="-148" rx="14" ry="30" fill="#fbecd9" opacity=".9" transform="rotate(90)"/><ellipse cx="0" cy="-148" rx="14" ry="30" fill="#fff8f3" opacity=".95" transform="rotate(120)"/><ellipse cx="0" cy="-148" rx="14" ry="30" fill="#fbecd9" opacity=".9" transform="rotate(150)"/><ellipse cx="0" cy="-148" rx="14" ry="30" fill="#fff8f3" opacity=".95" transform="rotate(180)"/><ellipse cx="0" cy="-148" rx="14" ry="30" fill="#fbecd9" opacity=".9" transform="rotate(210)"/><ellipse cx="0" cy="-148" rx="14" ry="30" fill="#fff8f3" opacity=".95" transform="rotate(240)"/><ellipse cx="0" cy="-148" rx="14" ry="30" fill="#fbecd9" opacity=".9" transform="rotate(270)"/><ellipse cx="0" cy="-148" rx="14" ry="30" fill="#fff8f3" opacity=".95" transform="rotate(300)"/><ellipse cx="0" cy="-148" rx="14" ry="30" fill="#fbecd9" opacity=".9" transform="rotate(330)"/><circle cx="0" cy="-148" r="18" fill="#F2C044"/><circle cx="0" cy="-148" r="10" fill="#cb9d21"/></g></svg></div>
+
+  <div class="grid md:grid-cols-2 gap-12 items-center z-10 w-full">
+    <div class="space-y-8">
+      <div>
+        <p class="section-label mb-3">✦ estudios bíblicos</p>
+        <h1 id="hero-tagline" class="font-display text-5xl md:text-6xl leading-tight text-brown"></h1>
+      </div>
+      <p id="hero-desc" class="text-lg text-brown-mid leading-relaxed max-w-md"></p>
+      <div class="flex flex-wrap gap-4">
+        <a href="#videos" class="btn-primary">Empieza aquí →</a>
+        <a href="estudios.html" class="btn-outline">Ver todos los estudios</a>
+      </div>
+    </div>
+    <!-- ilustración floral derecha -->
+    <div class="relative hidden md:flex items-center justify-center">
+      <div class="w-80 h-80 rounded-5xl bg-cream-mid flex items-center justify-center overflow-hidden shadow-warm-lg">
+        <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" class="w-72 h-72">
+          <!-- bouquet ilustrado -->
+          <g transform="translate(160,260)">
+            <!-- stems -->
+            <path d="M0,0 Q-20,-40 -30,-100 Q-35,-150 -20,-190" stroke="#5a7a3a" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <path d="M0,0 Q5,-50 10,-100 Q15,-150 5,-200" stroke="#6a9a4a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <path d="M0,0 Q25,-40 35,-90 Q42,-140 30,-180" stroke="#5a7a3a" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <!-- leaves -->
+            <path d="M-25,-80 Q-55,-70 -58,-50 Q-38,-65 -25,-80Z" fill="#8abb66" opacity=".9"/>
+            <path d="M10,-100 Q40,-92 44,-72 Q25,-85 10,-100Z" fill="#7aaa55" opacity=".85"/>
+            <path d="M28,-60 Q55,-55 58,-38 Q38,-50 28,-60Z" fill="#8abb66" opacity=".8"/>
+            <!-- poppy left -->
+            <g transform="translate(-22,-198)">
+              <ellipse cx="0" cy="0" rx="24" ry="40" fill="#E88D5D" opacity=".95" transform="rotate(0)"/>
+              <ellipse cx="0" cy="0" rx="24" ry="40" fill="#d4744a" opacity=".8"  transform="rotate(45)"/>
+              <ellipse cx="0" cy="0" rx="24" ry="40" fill="#E88D5D" opacity=".9"  transform="rotate(90)"/>
+              <ellipse cx="0" cy="0" rx="24" ry="40" fill="#c9623a" opacity=".75" transform="rotate(135)"/>
+              <ellipse cx="0" cy="0" rx="24" ry="40" fill="#E88D5D" opacity=".95" transform="rotate(180)"/>
+              <ellipse cx="0" cy="0" rx="24" ry="40" fill="#d4744a" opacity=".8"  transform="rotate(225)"/>
+              <ellipse cx="0" cy="0" rx="24" ry="40" fill="#E88D5D" opacity=".9"  transform="rotate(270)"/>
+              <ellipse cx="0" cy="0" rx="24" ry="40" fill="#c9623a" opacity=".75" transform="rotate(315)"/>
+              <circle cx="0" cy="0" r="18" fill="#372f22"/>
+              <circle cx="0" cy="0" r="8"  fill="#594535"/>
+            </g>
+            <!-- sunflower center -->
+            <g transform="translate(5,-207)">
+              <ellipse cx="0" cy="0" rx="12" ry="28" fill="#F2C044" opacity=".95" transform="rotate(0)"/>
+              <ellipse cx="0" cy="0" rx="12" ry="28" fill="#f1b830" opacity=".85" transform="rotate(22.5)"/>
+              <ellipse cx="0" cy="0" rx="12" ry="28" fill="#F2C044" opacity=".9"  transform="rotate(45)"/>
+              <ellipse cx="0" cy="0" rx="12" ry="28" fill="#f1b830" opacity=".85" transform="rotate(67.5)"/>
+              <ellipse cx="0" cy="0" rx="12" ry="28" fill="#F2C044" opacity=".95" transform="rotate(90)"/>
+              <ellipse cx="0" cy="0" rx="12" ry="28" fill="#f1b830" opacity=".85" transform="rotate(112.5)"/>
+              <ellipse cx="0" cy="0" rx="12" ry="28" fill="#F2C044" opacity=".9"  transform="rotate(135)"/>
+              <ellipse cx="0" cy="0" rx="12" ry="28" fill="#f1b830" opacity=".85" transform="rotate(157.5)"/>
+              <ellipse cx="0" cy="0" rx="12" ry="28" fill="#F2C044" opacity=".95" transform="rotate(180)"/>
+              <ellipse cx="0" cy="0" rx="12" ry="28" fill="#f1b830" opacity=".85" transform="rotate(202.5)"/>
+              <ellipse cx="0" cy="0" rx="12" ry="28" fill="#F2C044" opacity=".9"  transform="rotate(225)"/>
+              <ellipse cx="0" cy="0" rx="12" ry="28" fill="#f1b830" opacity=".85" transform="rotate(247.5)"/>
+              <ellipse cx="0" cy="0" rx="12" ry="28" fill="#F2C044" opacity=".95" transform="rotate(270)"/>
+              <ellipse cx="0" cy="0" rx="12" ry="28" fill="#f1b830" opacity=".85" transform="rotate(292.5)"/>
+              <ellipse cx="0" cy="0" rx="12" ry="28" fill="#F2C044" opacity=".9"  transform="rotate(315)"/>
+              <ellipse cx="0" cy="0" rx="12" ry="28" fill="#f1b830" opacity=".85" transform="rotate(337.5)"/>
+              <circle cx="0" cy="0" r="24" fill="#372f22"/>
+              <circle cx="-5" cy="-4" r="3" fill="#594535" opacity=".8"/>
+              <circle cx="5" cy="-4" r="2.5" fill="#594535" opacity=".7"/>
+              <circle cx="0" cy="4" r="3" fill="#594535" opacity=".8"/>
+            </g>
+            <!-- rose right -->
+            <g transform="translate(30,-185)">
+              <path d="M0,0 Q14,-12 12,-24 Q4,-16 0,0Z" fill="#e8a0b4" opacity=".9"/>
+              <path d="M0,0 Q-14,-12 -12,-24 Q-4,-16 0,0Z" fill="#d4748f" opacity=".85"/>
+              <path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#f0b8c8" opacity=".8"  transform="rotate(40)"/>
+              <path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#e8a0b4" opacity=".75" transform="rotate(80)"/>
+              <path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#d4748f" opacity=".8"  transform="rotate(120)"/>
+              <path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#f0b8c8" opacity=".7"  transform="rotate(160)"/>
+              <path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#e8a0b4" opacity=".75" transform="rotate(200)"/>
+              <path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#d4748f" opacity=".7"  transform="rotate(240)"/>
+              <path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#f0b8c8" opacity=".75" transform="rotate(280)"/>
+              <path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#e8a0b4" opacity=".8"  transform="rotate(320)"/>
+              <circle cx="0" cy="-8" r="9" fill="#c45c7a" opacity=".9"/>
+              <circle cx="0" cy="-8" r="5" fill="#a03d5f"/>
+            </g>
+            <!-- small lavender buds -->
+            <g transform="translate(-38,-165)">
+              <ellipse cx="0" cy="0" rx="6" ry="11" fill="#A581BB" opacity=".85"/>
+              <ellipse cx="0" cy="0" rx="6" ry="11" fill="#725187" opacity=".5" transform="rotate(40)"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ VIDEOS DESTACADOS (inicio — 3 cards) ══ -->
+<section id="videos" class="px-6 md:px-16 py-20 max-w-7xl mx-auto relative overflow-hidden">
+  <div class="floral sway" style="top:-10px;right:10px;opacity:.1;width:120px;"><!-- lavender --><svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg"><path d="M60,190 Q55,150 58,100 Q60,60 60,10" stroke="#7aaa55" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M58,80 Q30,65 22,40 Q45,50 58,80Z" fill="#8abb66" opacity=".7"/><path d="M62,60 Q90,42 95,18 Q72,32 62,60Z" fill="#7aaa55" opacity=".65"/><ellipse cx="60" cy="10" rx="8" ry="13" fill="#A581BB" opacity=".85"/><ellipse cx="60" cy="10" rx="8" ry="13" fill="#725187" opacity=".5" transform="rotate(40,60,10)"/><ellipse cx="52" cy="30" rx="7" ry="11" fill="#A581BB" opacity=".8"/><ellipse cx="68" cy="30" rx="7" ry="11" fill="#9270a5" opacity=".75"/><ellipse cx="50" cy="50" rx="6" ry="10" fill="#b591cc" opacity=".7"/><ellipse cx="70" cy="50" rx="6" ry="10" fill="#A581BB" opacity=".7"/><ellipse cx="48" cy="68" rx="6" ry="9" fill="#9270a5" opacity=".65"/><ellipse cx="72" cy="68" rx="6" ry="9" fill="#A581BB" opacity=".65"/></svg></div>
+
+  <div class="flex justify-between items-end mb-10">
+    <div>
+      <p class="section-label mb-2">✦ serie completa</p>
+      <h2 class="font-display text-4xl text-brown">Empieza a explorar</h2>
+    </div>
+    <a href="estudios.html" class="text-primary font-semibold text-sm hover:underline flex items-center gap-1">
+      Ver todos <span class="material-symbols-outlined text-base">arrow_right_alt</span>
+    </a>
+  </div>
+
+  <!-- 3 cards destacadas -->
+  <div class="grid md:grid-cols-3 gap-6" id="featured-videos"></div>
+
+  <div class="text-center mt-12">
+    <a href="estudios.html" class="btn-primary inline-flex items-center gap-2">
+      Ver todos los estudios
+      <span class="material-symbols-outlined">arrow_forward</span>
+    </a>
+  </div>
+</section>
+
+<!-- ══ CHAT IA ══ -->
+<section id="chat" class="py-20 relative overflow-hidden" style="background:var(--cream-mid);">
+  <div class="floral float-a" style="bottom:-10px;right:20px;opacity:.11;width:160px;"><!-- rose --><svg viewBox="0 0 150 200" xmlns="http://www.w3.org/2000/svg"><g transform="translate(75,170)"><path d="M0,25 Q-6,5 0,-50 Q5,-100 0,-140" stroke="#5a7a3a" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M-1,-50 Q-38,-60 -42,-90 Q-15,-65 -1,-50Z" fill="#8abb66" opacity=".75"/><path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#e8a0b4" opacity=".9" transform="translate(0,-148)"/><path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#d4748f" opacity=".8"  transform="translate(0,-148) rotate(40)"/><path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#f0b8c8" opacity=".85" transform="translate(0,-148) rotate(80)"/><path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#e8a0b4" opacity=".75" transform="translate(0,-148) rotate(120)"/><path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#d4748f" opacity=".8"  transform="translate(0,-148) rotate(160)"/><path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#f0b8c8" opacity=".7"  transform="translate(0,-148) rotate(200)"/><path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#e8a0b4" opacity=".75" transform="translate(0,-148) rotate(240)"/><path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#d4748f" opacity=".7"  transform="translate(0,-148) rotate(280)"/><path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#f0b8c8" opacity=".75" transform="translate(0,-148) rotate(320)"/><circle cx="0" cy="-156" r="10" fill="#c45c7a" opacity=".9"/><circle cx="0" cy="-156" r="5" fill="#a03d5f"/></g></svg></div>
+
+  <div class="px-6 md:px-16 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <div class="space-y-5">
+      <p class="section-label">✦ asistente bíblico</p>
+      <h2 class="font-display text-4xl text-brown">¿Tienes preguntas?</h2>
+      <p class="text-lg text-brown-mid leading-relaxed">
+        Nuestro asistente virtual está disponible 24/7 — responde con la Biblia
+        y escritos de Elena G. de White. Sin juicios, solo respuestas.
+      </p>
+    </div>
+
+    <!-- chat UI -->
+    <div class="bg-cream rounded-5xl p-6 shadow-warm-lg border border-cream-dark relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-28 h-28 rounded-bl-full" style="background:#e8c0ff30;"></div>
+      <div id="chat-messages" class="flex flex-col gap-4 min-h-[260px] overflow-y-auto max-h-80 mb-4 pr-1">
+        <div class="self-start max-w-[85%]">
+          <div class="bubble-in px-4 py-3 text-brown text-sm leading-relaxed">
+            ¡Hola! Estoy aquí para ayudarte. ¿Sobre qué tema te gustaría aprender hoy?
+          </div>
+          <span class="text-xs text-brown-mid mt-1 ml-2 block">Asistente bíblico • ahora</span>
+        </div>
+      </div>
+      <div class="flex gap-2">
+        <input id="chat-input" type="text" placeholder="Escribe tu pregunta..."
+               class="flex-1 bg-cream-mid border border-cream-dark rounded-full px-4 py-3 text-sm text-brown placeholder-brown-mid outline-none focus:border-primary-c transition-colors"
+               onkeydown="if(event.key==='Enter') sendChat()"/>
+        <button onclick="sendChat()"
+                class="w-11 h-11 rounded-full flex items-center justify-center text-white transition-all hover:-translate-y-0.5"
+                style="background:var(--primary-c);">
+          <span class="material-symbols-outlined text-xl">send</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ QUIZ ══ -->
+<section id="quiz" class="px-6 md:px-16 py-20 max-w-7xl mx-auto text-center relative overflow-hidden">
+  <div class="floral float-b" style="top:-20px;left:-30px;opacity:.09;width:180px;"><!-- sunflower --><svg viewBox="0 0 180 220" xmlns="http://www.w3.org/2000/svg"><g transform="translate(90,160)"><path d="M0,50 Q-8,20 -5,-40 Q0,-90 2,-150" stroke="#5a7a3a" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M-3,-50 Q-50,-65 -55,-100 Q-22,-72 -3,-50Z" fill="#8abb66" opacity=".8"/><path d="M1,-80 Q48,-98 52,-135 Q20,-105 1,-80Z" fill="#7aaa55" opacity=".75"/><ellipse cx="0" cy="-165" rx="12" ry="28" fill="#F2C044" opacity=".95" transform="rotate(0)"/><ellipse cx="0" cy="-165" rx="12" ry="28" fill="#f1b830" opacity=".85" transform="rotate(22.5)"/><ellipse cx="0" cy="-165" rx="12" ry="28" fill="#F2C044" opacity=".9" transform="rotate(45)"/><ellipse cx="0" cy="-165" rx="12" ry="28" fill="#f1b830" opacity=".85" transform="rotate(67.5)"/><ellipse cx="0" cy="-165" rx="12" ry="28" fill="#F2C044" opacity=".95" transform="rotate(90)"/><ellipse cx="0" cy="-165" rx="12" ry="28" fill="#f1b830" opacity=".85" transform="rotate(112.5)"/><ellipse cx="0" cy="-165" rx="12" ry="28" fill="#F2C044" opacity=".9" transform="rotate(135)"/><ellipse cx="0" cy="-165" rx="12" ry="28" fill="#f1b830" opacity=".85" transform="rotate(157.5)"/><ellipse cx="0" cy="-165" rx="12" ry="28" fill="#F2C044" opacity=".95" transform="rotate(180)"/><ellipse cx="0" cy="-165" rx="12" ry="28" fill="#f1b830" opacity=".85" transform="rotate(202.5)"/><ellipse cx="0" cy="-165" rx="12" ry="28" fill="#F2C044" opacity=".9" transform="rotate(225)"/><ellipse cx="0" cy="-165" rx="12" ry="28" fill="#f1b830" opacity=".85" transform="rotate(247.5)"/><ellipse cx="0" cy="-165" rx="12" ry="28" fill="#F2C044" opacity=".95" transform="rotate(270)"/><ellipse cx="0" cy="-165" rx="12" ry="28" fill="#f1b830" opacity=".85" transform="rotate(292.5)"/><ellipse cx="0" cy="-165" rx="12" ry="28" fill="#F2C044" opacity=".9" transform="rotate(315)"/><ellipse cx="0" cy="-165" rx="12" ry="28" fill="#f1b830" opacity=".85" transform="rotate(337.5)"/><circle cx="0" cy="-165" r="26" fill="#372f22"/></g></svg></div>
+
+  <p class="section-label mb-3">✦ encuentra tu punto de partida</p>
+  <h2 class="font-display text-4xl text-brown mb-4">No sé por dónde empezar</h2>
+  <p class="text-brown-mid mb-12 max-w-xl mx-auto">Selecciona lo que mejor describe tu búsqueda y te recomendamos un camino.</p>
+
+  <div class="grid md:grid-cols-3 gap-6" id="quiz-options"></div>
+</section>
+
+<!-- ══ TESTIMONIOS ══ -->
+<section id="testimonios" class="py-20 relative overflow-hidden" style="background:var(--cream-dark);">
+  <!-- wisteria top -->
+  <div class="floral" style="top:0;left:50%;transform:translateX(-50%);opacity:.08;width:300px;"><svg viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg"><path d="M0,5 Q75,20 150,8 Q225,0 300,10" stroke="#8abb66" stroke-width="3" fill="none"/><g transform="translate(40,5)"><line x1="0" y1="0" x2="-5" y2="25" stroke="#7aaa55" stroke-width="1.5"/><ellipse cx="-5" cy="30" rx="6" ry="9" fill="#A581BB" opacity=".8"/></g><g transform="translate(90,8)"><line x1="0" y1="0" x2="3" y2="30" stroke="#7aaa55" stroke-width="1.5"/><ellipse cx="3" cy="35" rx="5" ry="8" fill="#b591cc" opacity=".75"/></g><g transform="translate(140,4)"><line x1="0" y1="0" x2="-2" y2="28" stroke="#7aaa55" stroke-width="1.5"/><ellipse cx="-2" cy="33" rx="6" ry="10" fill="#A581BB" opacity=".8"/></g><g transform="translate(185,7)"><line x1="0" y1="0" x2="4" y2="22" stroke="#7aaa55" stroke-width="1.5"/><ellipse cx="4" cy="27" rx="5" ry="8" fill="#b591cc" opacity=".7"/></g><g transform="translate(230,4)"><line x1="0" y1="0" x2="-3" y2="32" stroke="#7aaa55" stroke-width="1.5"/><ellipse cx="-3" cy="37" rx="6" ry="9" fill="#A581BB" opacity=".78"/></g><g transform="translate(270,6)"><line x1="0" y1="0" x2="2" y2="20" stroke="#7aaa55" stroke-width="1.5"/><ellipse cx="2" cy="25" rx="5" ry="7" fill="#b591cc" opacity=".65"/></g></svg></div>
+
+  <div class="px-6 md:px-16 max-w-7xl mx-auto">
+    <div class="text-center mb-14">
+      <p class="section-label mb-3">✦ historias reales</p>
+      <h2 class="font-display text-4xl text-brown">Lo que ha cambiado en nosotros</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8" id="testimonials-grid"></div>
+  </div>
+</section>
+
+<!-- ══ CONTACTO ══ -->
+<section id="contacto" class="px-6 md:px-16 py-20 max-w-7xl mx-auto relative overflow-hidden">
+  <div class="floral float-b" style="top:-10px;right:10px;opacity:.09;width:160px;"><!-- branch --><svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg"><path d="M10,150 Q40,120 80,90 Q120,60 155,20" stroke="#7aaa55" stroke-width="3.5" fill="none" stroke-linecap="round"/><path d="M50,115 Q30,90 40,70 Q55,95 50,115Z" fill="#8abb66" opacity=".75"/><path d="M95,82 Q115,62 108,42 Q92,65 95,82Z" fill="#7aaa55" opacity=".7"/><g transform="translate(20,138)"><ellipse cx="0" cy="0" rx="10" ry="16" fill="#f0b8c8" opacity=".9" transform="rotate(0)"/><ellipse cx="0" cy="0" rx="10" ry="16" fill="#e8a0b4" opacity=".75" transform="rotate(60)"/><ellipse cx="0" cy="0" rx="10" ry="16" fill="#f0b8c8" opacity=".85" transform="rotate(120)"/><ellipse cx="0" cy="0" rx="10" ry="16" fill="#d4748f" opacity=".7" transform="rotate(180)"/><ellipse cx="0" cy="0" rx="10" ry="16" fill="#f0b8c8" opacity=".85" transform="rotate(240)"/><ellipse cx="0" cy="0" rx="10" ry="16" fill="#e8a0b4" opacity=".75" transform="rotate(300)"/><circle cx="0" cy="0" r="8" fill="#944a20"/></g><g transform="translate(85,85)"><ellipse cx="0" cy="0" rx="9" ry="14" fill="#e8c0ff" opacity=".9" transform="rotate(0)"/><ellipse cx="0" cy="0" rx="9" ry="14" fill="#dfb8f6" opacity=".75" transform="rotate(72)"/><ellipse cx="0" cy="0" rx="9" ry="14" fill="#e8c0ff" opacity=".85" transform="rotate(144)"/><ellipse cx="0" cy="0" rx="9" ry="14" fill="#dfb8f6" opacity=".75" transform="rotate(216)"/><ellipse cx="0" cy="0" rx="9" ry="14" fill="#e8c0ff" opacity=".85" transform="rotate(288)"/><circle cx="0" cy="0" r="7" fill="#F2C044"/></g><g transform="translate(148,26)"><ellipse cx="0" cy="0" rx="8" ry="13" fill="#E88D5D" opacity=".9" transform="rotate(0)"/><ellipse cx="0" cy="0" rx="8" ry="13" fill="#d4744a" opacity=".75" transform="rotate(45)"/><ellipse cx="0" cy="0" rx="8" ry="13" fill="#E88D5D" opacity=".85" transform="rotate(90)"/><ellipse cx="0" cy="0" rx="8" ry="13" fill="#c9623a" opacity=".7" transform="rotate(135)"/><ellipse cx="0" cy="0" rx="8" ry="13" fill="#E88D5D" opacity=".85" transform="rotate(180)"/><ellipse cx="0" cy="0" rx="8" ry="13" fill="#d4744a" opacity=".75" transform="rotate(225)"/><ellipse cx="0" cy="0" rx="8" ry="13" fill="#E88D5D" opacity=".85" transform="rotate(270)"/><ellipse cx="0" cy="0" rx="8" ry="13" fill="#c9623a" opacity=".7" transform="rotate(315)"/><circle cx="0" cy="0" r="6" fill="#372f22"/></g></svg></div>
+
+  <div class="bg-cream-mid rounded-5xl overflow-hidden shadow-warm-lg border border-cream-dark grid md:grid-cols-2">
+    <div class="p-12 md:p-16 relative overflow-hidden flex flex-col justify-center" style="background:var(--cream-dark);">
+      <div class="absolute -bottom-16 -left-16 w-56 h-56 rounded-full" style="background:#e88d5d18;filter:blur(40px);"></div>
+      <p class="section-label mb-4 relative z-10">✦ estudio personalizado</p>
+      <h2 class="font-display text-4xl text-brown mb-6 relative z-10">Quiero un estudio personalizado</h2>
+      <p class="text-brown-mid leading-relaxed relative z-10">Déjanos tus datos y un miembro de nuestra iglesia te contactará en menos de 48 horas — sin compromisos.</p>
+    </div>
+    <div class="p-12 md:p-16">
+      <form id="contact-form" class="space-y-6" onsubmit="submitContact(event)">
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-brown-mid mb-2">Nombre completo</label>
+          <input id="cf-name" type="text" placeholder="Tu nombre"
+                 class="w-full bg-transparent border-0 border-b-2 border-cream-dark focus:border-primary-c outline-none py-2 text-brown text-sm placeholder-brown-mid transition-colors"/>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-brown-mid mb-2">Correo electrónico</label>
+          <input id="cf-email" type="email" placeholder="tu@correo.com"
+                 class="w-full bg-transparent border-0 border-b-2 border-cream-dark focus:border-primary-c outline-none py-2 text-brown text-sm placeholder-brown-mid transition-colors"/>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-brown-mid mb-2">Ciudad</label>
+          <input id="cf-city" type="text" placeholder="¿De dónde nos escribes?"
+                 class="w-full bg-transparent border-0 border-b-2 border-cream-dark focus:border-primary-c outline-none py-2 text-brown text-sm placeholder-brown-mid transition-colors"/>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-brown-mid mb-2">Mensaje (opcional)</label>
+          <textarea id="cf-msg" rows="2" placeholder="Cuéntanos un poco sobre ti..."
+                    class="w-full bg-transparent border-0 border-b-2 border-cream-dark focus:border-primary-c outline-none py-2 text-brown text-sm placeholder-brown-mid transition-colors resize-none"></textarea>
+        </div>
+        <button type="submit" class="btn-primary w-full justify-center">Enviar solicitud</button>
+      </form>
+      <div id="form-success" class="hidden text-center py-8">
+        <div class="text-4xl mb-3">✦</div>
+        <p class="font-display text-2xl text-brown mb-2">¡Gracias!</p>
+        <p class="text-brown-mid text-sm">Te contactaremos pronto.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ IGLESIA ══ -->
+<section class="px-6 md:px-16 py-16 max-w-7xl mx-auto border-t border-cream-dark relative overflow-hidden">
+  <div class="floral sway" style="bottom:-20px;left:-10px;opacity:.08;width:180px;transform-origin:bottom left;"><!-- fern --><svg viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg"><path d="M90,195 Q88,160 82,120 Q74,80 60,45 Q50,20 40,5" stroke="#5a7a3a" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M88,170 Q60,160 52,142 Q72,155 88,170Z" fill="#7aaa55" opacity=".7"/><path d="M85,148 Q52,132 46,112 Q68,128 85,148Z" fill="#8abb66" opacity=".65"/><path d="M80,122 Q48,102 44,80 Q66,100 80,122Z" fill="#7aaa55" opacity=".7"/><path d="M74,96 Q46,74 44,52 Q64,72 74,96Z" fill="#8abb66" opacity=".65"/><path d="M92,165 Q120,152 126,134 Q106,148 92,165Z" fill="#8abb66" opacity=".65"/><path d="M87,140 Q116,124 122,104 Q102,120 87,140Z" fill="#7aaa55" opacity=".6"/><path d="M82,114 Q110,96 118,76 Q96,94 82,114Z" fill="#8abb66" opacity=".65"/></svg></div>
+
+  <div class="grid md:grid-cols-2 gap-12 items-start">
+    <div>
+      <p class="section-label mb-4">✦ visítanos</p>
+      <h3 class="font-display text-3xl text-brown mb-6" id="church-name"></h3>
+      <div class="space-y-5" id="church-details"></div>
+    </div>
+    <div class="h-72 rounded-4xl overflow-hidden shadow-warm-md">
+      <iframe id="church-map" width="100%" height="100%" style="border:0;filter:sepia(.2) saturate(.8);"
+              allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer class="border-t border-cream-dark px-6 md:px-16 py-10 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+  <div>
+    <a href="index.html" class="font-display text-xl text-primary italic" id="footer-name"></a>
+    <p class="text-xs text-brown-mid mt-1" id="footer-copy"></p>
+  </div>
+  <div class="flex gap-6 flex-wrap justify-center">
+    <a href="#videos"       class="nav-link">Videos</a>
+    <a href="estudios.html" class="nav-link">Estudios</a>
+    <a href="#contacto"     class="nav-link">Contacto</a>
+    <a href="#"             class="nav-link">Privacidad</a>
+  </div>
+  <div class="flex gap-4" id="footer-social"></div>
+</footer>
+
+<!-- ══ WHATSAPP FLOTANTE ══ -->
+<a id="wa-btn" href="#" target="_blank" rel="noopener"
+   class="fixed bottom-6 right-6 z-50 flex items-center gap-2 text-white px-5 py-3 rounded-full shadow-warm-lg text-sm font-semibold transition-all duration-300 hover:-translate-y-1"
+   style="background:#25D366;box-shadow:0 6px 24px rgba(37,211,102,.35);">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+  Quiero estudiar la Biblia
+</a>
+
+<script src="config.js"></script>
+<script>
+// ── Render desde CONFIG ──────────────────────────────────────
+
+// site name / tagline
+document.getElementById('nav-site-name').textContent  = CONFIG.siteName;
+document.getElementById('hero-tagline').textContent   = CONFIG.tagline;
+document.getElementById('hero-desc').textContent      = CONFIG.description;
+document.getElementById('footer-name').textContent    = CONFIG.siteName;
+document.getElementById('footer-copy').textContent    =
+  `© ${new Date().getFullYear()} ${CONFIG.siteName}. Una comunidad de fe para la nueva generación.`;
+
+// WhatsApp
+const waUrl = `https://wa.me/${CONFIG.whatsapp.number}?text=${encodeURIComponent(CONFIG.whatsapp.message)}`;
+document.getElementById('wa-btn').href = waUrl;
+
+// Videos destacados (primeros 3)
+const colorMap = {
+  'primary-c': '#e88d5d', gold: '#F2C044', 'secondary-c': '#e8c0ff', rose: '#e8a0b4'
+};
+const pillClass = {
+  'primary-c': 'pill-primary-c', gold: 'pill-gold', 'secondary-c': 'pill-secondary-c', rose: 'pill-rose'
+};
+function videoCard(v) {
+  const bg = v.thumbnail
+    ? `background:url('${v.thumbnail}') center/cover`
+    : `background:linear-gradient(135deg,${colorMap[v.color]}33,${colorMap[v.color]}66)`;
+  return `
+  <a href="${v.reelUrl}" target="_blank" rel="noopener"
+     class="card group block" style="text-decoration:none;">
+    <div class="relative aspect-video" style="${bg};">
+      <div class="absolute inset-0 bg-brown/10 group-hover:bg-brown/5 transition-colors flex items-center justify-center">
+        <div class="w-14 h-14 rounded-full bg-white/80 backdrop-blur flex items-center justify-center group-hover:scale-110 transition-transform shadow-warm-md">
+          <span class="material-symbols-outlined text-3xl" style="color:var(--primary-c);">play_arrow</span>
+        </div>
+      </div>
+      <div class="absolute bottom-3 right-3 bg-brown/75 backdrop-blur text-cream px-2 py-1 rounded text-xs font-semibold">${v.duration}</div>
+    </div>
+    <div class="p-5">
+      <span class="pill ${pillClass[v.color]} mb-3 inline-block">${v.tag}</span>
+      <h3 class="font-display text-xl text-brown mb-2 leading-snug">${v.title}</h3>
+      <p class="text-sm text-brown-mid leading-relaxed">${v.description}</p>
+    </div>
+  </a>`;
+}
+document.getElementById('featured-videos').innerHTML =
+  CONFIG.videos.slice(0,3).map(videoCard).join('');
+
+// Quiz
+const quizGrid = document.getElementById('quiz-options');
+quizGrid.innerHTML = CONFIG.quizOptions.map(q => `
+  <a href="estudios.html#${q.goTo}" class="card p-8 flex flex-col items-center text-center group cursor-pointer" style="text-decoration:none;">
+    <div class="w-16 h-16 rounded-full flex items-center justify-center mb-5 group-hover:scale-110 transition-transform"
+         style="background:${colorMap[q.color]}44;">
+      <span class="material-symbols-outlined text-3xl" style="color:${q.color==='gold'?'var(--gold-dim)':q.color==='secondary-c'?'var(--secondary)':'var(--primary)'};">${q.icon}</span>
+    </div>
+    <h3 class="font-display text-xl text-brown mb-2">${q.title}</h3>
+    <p class="text-sm text-brown-mid">${q.desc}</p>
+  </a>`).join('');
+
+// Testimonials
+document.getElementById('testimonials-grid').innerHTML =
+  CONFIG.testimonials.map((t, i) => `
+  <div class="bg-cream rounded-3xl p-8 shadow-warm-sm relative ${i===1?'md:mt-8':''}">
+    <div class="absolute top-5 right-5 text-4xl font-display leading-none" style="color:var(--cream-dark);">"</div>
+    <div class="flex items-center gap-4 mb-5">
+      <div class="w-12 h-12 rounded-full flex items-center justify-center font-display text-xl text-white"
+           style="background:${colorMap[t.color]};">${t.name[0]}</div>
+      <div>
+        <p class="font-semibold text-brown text-sm">${t.name}</p>
+        <p class="text-xs text-brown-mid">${t.role}</p>
+      </div>
+    </div>
+    <p class="font-display text-base italic text-brown-mid leading-relaxed">"${t.quote}"</p>
+  </div>`).join('');
+
+// Church
+document.getElementById('church-name').textContent = CONFIG.church.name;
+document.getElementById('church-details').innerHTML = `
+  <div class="flex gap-4">
+    <span class="material-symbols-outlined mt-0.5" style="color:var(--primary-c);">location_on</span>
+    <div>
+      <p class="font-semibold text-sm text-brown mb-1">Dirección</p>
+      <p class="text-sm text-brown-mid">${CONFIG.church.address}</p>
+    </div>
+  </div>
+  <div class="flex gap-4">
+    <span class="material-symbols-outlined mt-0.5" style="color:var(--primary-c);">schedule</span>
+    <div>
+      <p class="font-semibold text-sm text-brown mb-2">Horarios</p>
+      ${CONFIG.church.schedules.map(s=>`
+        <p class="text-sm text-brown-mid"><span class="font-medium text-brown">${s.day}:</span> ${s.time}</p>
+      `).join('')}
+    </div>
+  </div>
+  <div class="flex gap-4">
+    <span class="material-symbols-outlined mt-0.5" style="color:var(--primary-c);">mail</span>
+    <div>
+      <p class="font-semibold text-sm text-brown mb-1">Contacto</p>
+      <a href="mailto:${CONFIG.email}" class="text-sm text-primary hover:underline">${CONFIG.email}</a>
+    </div>
+  </div>`;
+document.getElementById('church-map').src = CONFIG.church.mapsEmbed;
+
+// Social footer
+const socialIcons = {
+  instagram: `<svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>`,
+  tiktok:    `<svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.08a8.27 8.27 0 004.84 1.55V7.19a4.85 4.85 0 01-1.07-.5z"/></svg>`,
+};
+document.getElementById('footer-social').innerHTML = Object.entries(CONFIG.social)
+  .filter(([,url]) => url)
+  .map(([k,url]) => `<a href="${url}" target="_blank" rel="noopener"
+      class="text-brown-mid hover:text-primary transition-colors" title="${k}">${socialIcons[k]||''}</a>`).join('');
+
+// historial de conversación
+let chatHistory = [];
+
+function sendChat() {
+  const input   = document.getElementById('chat-input');
+  const msg     = input.value.trim();
+  if (!msg) return;
+
+  const box = document.getElementById('chat-messages');
+
+  // mensaje del usuario
+  box.innerHTML += `
+    <div style="display:flex;justify-content:flex-end;">
+      <div style="max-width:85%;">
+        <div style="background:var(--primary-c);color:white;padding:12px 16px;border-radius:1.2rem 1.2rem 0.25rem 1.2rem;font-size:14px;line-height:1.5;">${msg}</div>
+      </div>
+    </div>`;
+  input.value = '';
+  box.scrollTop = box.scrollHeight;
+
+  // typing indicator
+  const typingId = 'typing-' + Date.now();
+  box.innerHTML += `
+    <div id="${typingId}" style="display:flex;align-items:flex-end;gap:8px;">
+      <div style="background:var(--cream-mid);padding:12px 16px;border-radius:1.2rem 1.2rem 1.2rem 0.25rem;display:flex;gap:4px;align-items:center;">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--brown-mid);animation:blink 1s infinite;"></span>
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--brown-mid);animation:blink 1s .2s infinite;"></span>
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--brown-mid);animation:blink 1s .4s infinite;"></span>
+      </div>
+    </div>`;
+  box.scrollTop = box.scrollHeight;
+
+  // agrega al historial
+  chatHistory.push({ role: "user", content: msg });
+
+  // llama al backend
+  fetch('http://localhost:8000/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ messages: chatHistory })
+  })
+  .then(r => r.json())
+  .then(data => {
+    document.getElementById(typingId)?.remove();
+    const reply = data.reply || 'Lo siento, hubo un error. Intenta de nuevo.';
+
+    // agrega respuesta al historial
+    chatHistory.push({ role: "assistant", content: reply });
+
+    box.innerHTML += `
+      <div style="display:flex;align-items:flex-start;gap:8px;">
+        <div style="width:32px;height:32px;border-radius:50%;background:var(--cream-dark);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;">✦</div>
+        <div style="max-width:85%;">
+          <div style="background:var(--cream-mid);color:var(--brown);padding:12px 16px;border-radius:1.2rem 1.2rem 1.2rem 0.25rem;font-size:14px;line-height:1.6;">${reply.replace(/\n/g, '<br>')}</div>
+          <span style="font-size:11px;color:var(--brown-mid);margin-top:4px;margin-left:8px;display:block;">Luz • ahora</span>
+        </div>
+      </div>`;
+    box.scrollTop = box.scrollHeight;
+  })
+  .catch(() => {
+    document.getElementById(typingId)?.remove();
+    box.innerHTML += `
+      <div style="background:var(--cream-mid);padding:12px 16px;border-radius:1.2rem;font-size:13px;color:var(--brown-mid);max-width:85%;">
+        Sin conexión con el asistente. Asegúrate de que el servidor esté corriendo.
+      </div>`;
+    box.scrollTop = box.scrollHeight;
+  });
+}
+
+// Formulario
+function submitContact(e) {
+  e.preventDefault();
+  const name  = document.getElementById('cf-name').value.trim();
+  const email = document.getElementById('cf-email').value.trim();
+  const city  = document.getElementById('cf-city').value.trim();
+  const msg   = document.getElementById('cf-msg').value.trim();
+  if (!name || !email) { alert('Por favor llena nombre y correo.'); return; }
+  const sub  = encodeURIComponent(`Solicitud de estudio bíblico — ${name}`);
+  const body = encodeURIComponent(`Nombre: ${name}\nCorreo: ${email}\nCiudad: ${city}\n\n${msg}`);
+  window.location.href = `mailto:${CONFIG.email}?subject=${sub}&body=${body}`;
+  document.getElementById('contact-form').style.display = 'none';
+  document.getElementById('form-success').classList.remove('hidden');
+}
+
+// Navbar scroll effect
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').style.borderBottomColor =
+    window.scrollY > 20 ? 'var(--cream-dark)' : 'transparent';
+});
+</script>
+</body>
+</html>

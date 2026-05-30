@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; }
+  h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary-c text-white px-8 py-4 rounded-full font-semibold
+           uppercase tracking-wider text-sm transition-all duration-300
+           hover:-translate-y-1 hover:shadow-warm-md;
+  }
+  .btn-outline {
+    @apply border-2 border-primary-c text-primary px-8 py-4 rounded-full
+           font-semibold uppercase tracking-wider text-sm transition-all
+           duration-300 hover:bg-primary-c hover:text-white;
+  }
+  .card {
+    @apply bg-white rounded-3xl shadow-warm-sm border border-cream-dark
+           overflow-hidden transition-all duration-300 hover:-translate-y-2
+           hover:shadow-warm-md;
+  }
+  .section-label {
+    @apply text-xs font-semibold uppercase tracking-widest text-brown-mid;
+  }
+  .nav-link {
+    @apply text-xs font-semibold uppercase tracking-widest text-brown-mid
+           hover:text-primary transition-colors duration-200;
+  }
+}
+
+@layer utilities {
+  /* Masonry grid Pinterest-style */
+  .masonry {
+    columns: 3;
+    column-gap: 1.5rem;
+  }
+  .masonry > * {
+    break-inside: avoid;
+    margin-bottom: 1.5rem;
+  }
+  @media (max-width: 1024px) { .masonry { columns: 2; } }
+  @media (max-width: 640px)  { .masonry { columns: 1; } }
+
+  /* Floral float animations */
+  .float-a { animation: floatA 7s ease-in-out infinite; }
+  .float-b { animation: floatB 9s ease-in-out infinite; }
+  .float-c { animation: floatC 11s ease-in-out infinite; }
+  .sway    { animation: sway 8s ease-in-out infinite; transform-origin: bottom center; }
+}
+
+/* Keyframes */
+@keyframes floatA {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%       { transform: translateY(-12px) rotate(4deg); }
+}
+@keyframes floatB {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%       { transform: translateY(-8px) rotate(-5deg); }
+}
+@keyframes floatC {
+  0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+  50%       { transform: translateY(-10px) rotate(3deg) scale(1.03); }
+}
+@keyframes sway {
+  0%, 100% { transform: rotate(-3deg); }
+  50%       { transform: rotate(3deg); }
+}
