@@ -501,7 +501,7 @@ function sendChat() {
   chatHistory.push({ role: "user", content: msg });
 
   // llama al backend
-  fetch('http://localhost:8000/chat', {
+  fetch('https://fe-sin-filtros-backend-production.up.railway.app/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ messages: chatHistory })
