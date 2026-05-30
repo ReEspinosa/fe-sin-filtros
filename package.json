@@ -1,7 +1,6 @@
 {
   "name": "fe-sin-filtros",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm install && ./node_modules/.bin/tailwindcss -i ./src/input.css -o ./dist/output.css",
