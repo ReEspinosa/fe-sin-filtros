@@ -203,44 +203,142 @@
   </div>
 </section>
 
-<!-- ══ CHAT IA ══ -->
 <section id="chat" class="py-20 relative overflow-hidden" style="background:var(--cream-mid);">
-  <div class="floral float-a" style="bottom:-10px;right:20px;opacity:.11;width:160px;"><!-- rose --><svg viewBox="0 0 150 200" xmlns="http://www.w3.org/2000/svg"><g transform="translate(75,170)"><path d="M0,25 Q-6,5 0,-50 Q5,-100 0,-140" stroke="#5a7a3a" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M-1,-50 Q-38,-60 -42,-90 Q-15,-65 -1,-50Z" fill="#8abb66" opacity=".75"/><path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#e8a0b4" opacity=".9" transform="translate(0,-148)"/><path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#d4748f" opacity=".8"  transform="translate(0,-148) rotate(40)"/><path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#f0b8c8" opacity=".85" transform="translate(0,-148) rotate(80)"/><path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#e8a0b4" opacity=".75" transform="translate(0,-148) rotate(120)"/><path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#d4748f" opacity=".8"  transform="translate(0,-148) rotate(160)"/><path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#f0b8c8" opacity=".7"  transform="translate(0,-148) rotate(200)"/><path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#e8a0b4" opacity=".75" transform="translate(0,-148) rotate(240)"/><path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#d4748f" opacity=".7"  transform="translate(0,-148) rotate(280)"/><path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#f0b8c8" opacity=".75" transform="translate(0,-148) rotate(320)"/><circle cx="0" cy="-156" r="10" fill="#c45c7a" opacity=".9"/><circle cx="0" cy="-156" r="5" fill="#a03d5f"/></g></svg></div>
+    <div class="floral float-a" style="bottom:-10px;right:20px;opacity:.11;width:160px;"><svg viewBox="0 0 150 200" xmlns="http://www.w3.org/2000/svg"><g transform="translate(75,170)"><path d="M0,25 Q-6,5 0,-50 Q5,-100 0,-140" stroke="#5a7a3a" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M-1,-50 Q-38,-60 -42,-90 Q-15,-65 -1,-50Z" fill="#8abb66" opacity=".75"/><path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#e8a0b4" opacity=".9" transform="translate(0,-148)"/><path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#d4748f" opacity=".8" transform="translate(0,-148) rotate(40)"/><path d="M0,0 Q16,-8 18,-20 Q8,-12 0,0Z" fill="#f0b8c8" opacity=".85" transform="translate(0,-148) rotate(80)"/><circle cx="0" cy="-156" r="10" fill="#c45c7a" opacity=".9"/><circle cx="0" cy="-156" r="5" fill="#a03d5f"/></g></svg></div>
 
-  <div class="px-6 md:px-16 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-    <div class="space-y-5">
-      <p class="section-label">✦ asistente bíblico</p>
-      <h2 class="font-display text-4xl text-brown">¿Tienes preguntas?</h2>
-      <p class="text-lg text-brown-mid leading-relaxed">
-        Nuestro asistente virtual está disponible 24/7 — responde con la Biblia
-        y escritos de Elena G. de White. Sin juicios, solo respuestas.
-      </p>
-    </div>
-
-    <!-- chat UI -->
-    <div class="bg-cream rounded-5xl p-6 shadow-warm-lg border border-cream-dark relative overflow-hidden">
-      <div class="absolute top-0 right-0 w-28 h-28 rounded-bl-full" style="background:#e8c0ff30;"></div>
-      <div id="chat-messages" class="flex flex-col gap-4 min-h-[260px] overflow-y-auto max-h-80 mb-4 pr-1">
-        <div class="self-start max-w-[85%]">
-          <div class="bubble-in px-4 py-3 text-brown text-sm leading-relaxed">
-            ¡Hola! Estoy aquí para ayudarte. ¿Sobre qué tema te gustaría aprender hoy?
-          </div>
-          <span class="text-xs text-brown-mid mt-1 ml-2 block">Asistente bíblico • ahora</span>
+    <!-- PREVIEW — lo que se ve en la sección -->
+    <div class="px-6 md:px-16 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+            <p class="section-label">✦ asistente bíblico</p>
+            <h2 class="font-display text-4xl md:text-5xl text-brown leading-tight">¿Tienes<br>preguntas?</h2>
+            <p class="text-lg text-brown-mid leading-relaxed max-w-md">
+                Habla con <strong>Luz</strong> — nuestro asistente bíblico disponible 24/7.
+                Responde con la Biblia y escritos de Elena G. de White. Sin juicios, solo respuestas.
+            </p>
+            <button onclick="openChat()"
+                    class="btn-primary inline-flex items-center gap-3 text-base px-8 py-4 group">
+                <span class="material-symbols-outlined text-xl group-hover:animate-bounce">chat</span>
+                Hablar con Luz
+            </button>
+            <div class="flex items-center gap-3 pt-2">
+                <div class="flex -space-x-2">
+                    <div class="w-8 h-8 rounded-full border-2 border-cream-mid flex items-center justify-center text-xs text-white font-bold" style="background:var(--primary-c);">S</div>
+                    <div class="w-8 h-8 rounded-full border-2 border-cream-mid flex items-center justify-center text-xs text-white font-bold" style="background:var(--secondary);">C</div>
+                    <div class="w-8 h-8 rounded-full border-2 border-cream-mid flex items-center justify-center text-xs text-white font-bold" style="background:var(--gold-dim);">A</div>
+                </div>
+                <p class="text-sm text-brown-mid">Más de 200 preguntas respondidas esta semana</p>
+            </div>
         </div>
-      </div>
-      <div class="flex gap-2">
-        <input id="chat-input" type="text" placeholder="Escribe tu pregunta..."
-               class="flex-1 bg-cream-mid border border-cream-dark rounded-full px-4 py-3 text-sm text-brown placeholder-brown-mid outline-none focus:border-primary-c transition-colors"
-               onkeydown="if(event.key==='Enter') sendChat()"/>
-        <button onclick="sendChat()"
-                class="w-11 h-11 rounded-full flex items-center justify-center text-white transition-all hover:-translate-y-0.5"
-                style="background:var(--primary-c);">
-          <span class="material-symbols-outlined text-xl">send</span>
-        </button>
-      </div>
+
+        <!-- preview card — click abre modal -->
+        <div onclick="openChat()" class="cursor-pointer group">
+            <div class="bg-cream rounded-5xl p-6 shadow-warm-lg border border-cream-dark relative overflow-hidden transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-warm-lg">
+                <div class="absolute top-0 right-0 w-32 h-32 rounded-bl-full" style="background:#e8c0ff25;"></div>
+                <!-- mensajes de preview -->
+                <div class="flex flex-col gap-4 mb-5">
+                    <div class="self-start max-w-[88%]">
+                        <div class="px-4 py-3 text-brown text-sm leading-relaxed rounded-3xl rounded-tl-sm" style="background:var(--cream-mid);">
+                            ¡Hola! Soy Luz ✦ Estoy aquí para ayudarte con cualquier pregunta sobre la Biblia.
+                        </div>
+                        <span class="text-xs text-brown-mid mt-1 ml-2 block">Luz • ahora</span>
+                    </div>
+                    <div class="self-end max-w-[80%]">
+                        <div class="px-4 py-3 text-white text-sm leading-relaxed rounded-3xl rounded-tr-sm" style="background:var(--primary-c);">
+                            ¿Qué dice la Biblia sobre la esperanza?
+                        </div>
+                    </div>
+                    <div class="self-start max-w-[88%]">
+                        <div class="px-4 py-3 text-brown text-sm leading-relaxed rounded-3xl rounded-tl-sm" style="background:var(--cream-mid);">
+              <span class="inline-flex gap-1 items-center">
+                <span style="width:7px;height:7px;border-radius:50%;background:var(--brown-mid);animation:blink 1s infinite;display:inline-block;"></span>
+                <span style="width:7px;height:7px;border-radius:50%;background:var(--brown-mid);animation:blink 1s .2s infinite;display:inline-block;"></span>
+                <span style="width:7px;height:7px;border-radius:50%;background:var(--brown-mid);animation:blink 1s .4s infinite;display:inline-block;"></span>
+              </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- input fake -->
+                <div class="flex gap-2 items-center px-4 py-3 rounded-full border border-cream-dark" style="background:var(--cream-mid);">
+                    <span class="text-sm text-brown-mid flex-1">Escribe tu pregunta...</span>
+                    <div class="w-9 h-9 rounded-full flex items-center justify-center text-white" style="background:var(--primary-c);">
+                        <span class="material-symbols-outlined text-lg">arrow_upward</span>
+                    </div>
+                </div>
+                <!-- overlay hint -->
+                <div class="absolute inset-0 rounded-5xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300" style="background:rgba(255,248,243,.6);backdrop-filter:blur(2px);">
+                    <div class="flex items-center gap-2 px-6 py-3 rounded-full text-white font-semibold text-sm shadow-warm-md" style="background:var(--primary-c);">
+                        <span class="material-symbols-outlined text-lg">open_in_full</span>
+                        Abrir chat completo
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
+
+<!-- ══ MODAL CHAT FULLSCREEN ══ -->
+<div id="chat-modal" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(34,26,15,.5);backdrop-filter:blur(8px);" onclick="if(event.target===this)closeChat()">
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;max-width:760px;width:100%;margin:0 auto;padding:16px;">
+        <div style="background:var(--cream);border-radius:2rem;display:flex;flex-direction:column;height:100%;overflow:hidden;box-shadow:0 32px 80px rgba(34,26,15,.25);">
+
+            <!-- header -->
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--cream-dark);flex-shrink:0;">
+                <div style="display:flex;align-items:center;gap:12px;">
+                    <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--primary-c),var(--rose));display:flex;align-items:center;justify-content:center;font-size:18px;">✦</div>
+                    <div>
+                        <p style="font-family:'Playfair Display',serif;font-size:18px;color:var(--brown);font-weight:700;">Luz</p>
+                        <div style="display:flex;align-items:center;gap:6px;">
+                            <span style="width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block;"></span>
+                            <span style="font-size:12px;color:var(--brown-mid);">Asistente bíblico · en línea</span>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="closeChat()" style="width:36px;height:36px;border-radius:50%;border:none;background:var(--cream-dark);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;" onmouseover="this.style.background='var(--cream-mid)'" onmouseout="this.style.background='var(--cream-dark)'">
+                    <span class="material-symbols-outlined" style="font-size:20px;color:var(--brown-mid);">close</span>
+                </button>
+            </div>
+
+            <!-- mensajes -->
+            <div id="chat-messages" style="flex:1;overflow-y:auto;padding:24px;display:flex;flex-direction:column;gap:16px;scroll-behavior:smooth;">
+                <div style="display:flex;align-items:flex-start;gap:10px;">
+                    <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--primary-c),var(--rose));display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">✦</div>
+                    <div style="max-width:85%;">
+                        <div style="background:var(--cream-mid);color:var(--brown);padding:14px 18px;border-radius:1.5rem 1.5rem 1.5rem 0.25rem;font-size:15px;line-height:1.65;">
+                            ¡Hola! Soy <strong>Luz</strong> ✦ Estoy aquí para ayudarte con cualquier pregunta sobre la Biblia, la fe adventista o la vida espiritual. ¿Qué tienes en mente?
+                        </div>
+                        <span style="font-size:11px;color:var(--brown-mid);margin-top:5px;margin-left:10px;display:block;">Luz • ahora</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- sugerencias rápidas -->
+            <div id="chat-suggestions" style="padding:0 24px 12px;display:flex;gap:8px;flex-wrap:wrap;flex-shrink:0;">
+                <button onclick="sendSuggestion(this)" class="suggestion-btn" style="padding:7px 14px;border-radius:999px;border:1.5px solid var(--cream-dark);background:white;font-size:12px;color:var(--brown-mid);cursor:pointer;transition:all .2s;font-family:'Plus Jakarta Sans',sans-serif;" onmouseover="this.style.borderColor='var(--primary-c)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='var(--cream-dark)';this.style.color='var(--brown-mid)'">¿Qué es el sábado?</button>
+                <button onclick="sendSuggestion(this)" class="suggestion-btn" style="padding:7px 14px;border-radius:999px;border:1.5px solid var(--cream-dark);background:white;font-size:12px;color:var(--brown-mid);cursor:pointer;transition:all .2s;font-family:'Plus Jakarta Sans',sans-serif;" onmouseover="this.style.borderColor='var(--primary-c)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='var(--cream-dark)';this.style.color='var(--brown-mid)'">¿Qué pasa después de morir?</button>
+                <button onclick="sendSuggestion(this)" class="suggestion-btn" style="padding:7px 14px;border-radius:999px;border:1.5px solid var(--cream-dark);background:white;font-size:12px;color:var(--brown-mid);cursor:pointer;transition:all .2s;font-family:'Plus Jakarta Sans',sans-serif;" onmouseover="this.style.borderColor='var(--primary-c)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='var(--cream-dark)';this.style.color='var(--brown-mid)'">¿Por qué hay sufrimiento?</button>
+                <button onclick="sendSuggestion(this)" class="suggestion-btn" style="padding:7px 14px;border-radius:999px;border:1.5px solid var(--cream-dark);background:white;font-size:12px;color:var(--brown-mid);cursor:pointer;transition:all .2s;font-family:'Plus Jakarta Sans',sans-serif;" onmouseover="this.style.borderColor='var(--primary-c)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='var(--cream-dark)';this.style.color='var(--brown-mid)'">¿Cómo orar mejor?</button>
+            </div>
+
+            <!-- input -->
+            <div style="padding:16px 24px 20px;border-top:1px solid var(--cream-dark);display:flex;gap:10px;align-items:flex-end;flex-shrink:0;">
+        <textarea id="chat-input"
+                  placeholder="Escribe tu pregunta..."
+                  rows="1"
+                  onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat();}"
+                  oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,120)+'px'"
+                  style="flex:1;background:var(--cream-mid);border:1.5px solid var(--cream-dark);border-radius:1.2rem;padding:12px 16px;font-size:15px;font-family:'Plus Jakarta Sans',sans-serif;color:var(--brown);outline:none;resize:none;line-height:1.5;transition:border-color .2s;max-height:120px;overflow-y:auto;"
+                  onfocus="this.style.borderColor='var(--primary-c)'"
+                  onblur="this.style.borderColor='var(--cream-dark)'"></textarea>
+                <button onclick="sendChat()"
+                        style="width:48px;height:48px;border-radius:50%;background:var(--primary-c);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:white;transition:all .25s;flex-shrink:0;"
+                        onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px rgba(148,74,32,.3)'"
+                        onmouseout="this.style.transform='';this.style.boxShadow=''">
+                    <span class="material-symbols-outlined" style="font-size:22px;">arrow_upward</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- ══ QUIZ ══ -->
 <section id="quiz" class="px-6 md:px-16 py-20 max-w-7xl mx-auto text-center relative overflow-hidden">
@@ -465,37 +563,102 @@ document.getElementById('footer-social').innerHTML = Object.entries(CONFIG.socia
   .map(([k,url]) => `<a href="${url}" target="_blank" rel="noopener"
       class="text-brown-mid hover:text-primary transition-colors" title="${k}">${socialIcons[k]||''}</a>`).join('');
 
-// historial de conversación
+// ── CHAT MODAL ───────────────────────────────────────────────
 let chatHistory = [];
+let chatOpened  = false;
+
+function openChat() {
+  const modal = document.getElementById('chat-modal');
+  modal.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => {
+    document.getElementById('chat-input').focus();
+  }, 300);
+}
+
+function closeChat() {
+  document.getElementById('chat-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+// cerrar con Escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeChat();
+});
+
+function sendSuggestion(btn) {
+  const text = btn.textContent;
+  document.getElementById('chat-suggestions').style.display = 'none';
+  document.getElementById('chat-input').value = text;
+  sendChat();
+}
 
 function sendChat() {
-  const input   = document.getElementById('chat-input');
-  const msg     = input.value.trim();
+  const input = document.getElementById('chat-input');
+  const msg   = input.value.trim();
   if (!msg) return;
 
   const box = document.getElementById('chat-messages');
 
-  // mensaje del usuario
+  // oculta sugerencias al primer mensaje
+  document.getElementById('chat-suggestions').style.display = 'none';
+
+  // mensaje usuario
   box.innerHTML += `
     <div style="display:flex;justify-content:flex-end;">
-      <div style="max-width:85%;">
-        <div style="background:var(--primary-c);color:white;padding:12px 16px;border-radius:1.2rem 1.2rem 0.25rem 1.2rem;font-size:14px;line-height:1.5;">${msg}</div>
+      <div style="max-width:80%;">
+        <div style="background:var(--primary-c);color:white;padding:14px 18px;border-radius:1.5rem 1.5rem 0.25rem 1.5rem;font-size:15px;line-height:1.6;">${msg.replace(/\n/g,'<br>')}</div>
       </div>
     </div>`;
   input.value = '';
+  input.style.height = 'auto';
   box.scrollTop = box.scrollHeight;
 
-  // typing indicator
+  // typing
   const typingId = 'typing-' + Date.now();
   box.innerHTML += `
-    <div id="${typingId}" style="display:flex;align-items:flex-end;gap:8px;">
-      <div style="background:var(--cream-mid);padding:12px 16px;border-radius:1.2rem 1.2rem 1.2rem 0.25rem;display:flex;gap:4px;align-items:center;">
-        <span style="width:7px;height:7px;border-radius:50%;background:var(--brown-mid);animation:blink 1s infinite;"></span>
-        <span style="width:7px;height:7px;border-radius:50%;background:var(--brown-mid);animation:blink 1s .2s infinite;"></span>
-        <span style="width:7px;height:7px;border-radius:50%;background:var(--brown-mid);animation:blink 1s .4s infinite;"></span>
+    <div id="${typingId}" style="display:flex;align-items:flex-start;gap:10px;">
+      <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--primary-c),var(--rose));display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">✦</div>
+      <div style="background:var(--cream-mid);padding:14px 18px;border-radius:1.5rem 1.5rem 1.5rem 0.25rem;display:flex;gap:5px;align-items:center;">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--brown-mid);animation:blink 1s infinite;display:inline-block;"></span>
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--brown-mid);animation:blink 1s .2s infinite;display:inline-block;"></span>
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--brown-mid);animation:blink 1s .4s infinite;display:inline-block;"></span>
       </div>
     </div>`;
   box.scrollTop = box.scrollHeight;
+
+  chatHistory.push({ role: 'user', content: msg });
+
+  fetch('https://fe-sin-filtros-backend-production.up.railway.app/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ messages: chatHistory })
+  })
+  .then(r => r.json())
+  .then(data => {
+    document.getElementById(typingId)?.remove();
+    const reply = data.reply || 'Lo siento, hubo un error. Intenta de nuevo.';
+    chatHistory.push({ role: 'assistant', content: reply });
+    box.innerHTML += `
+      <div style="display:flex;align-items:flex-start;gap:10px;">
+        <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--primary-c),var(--rose));display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">✦</div>
+        <div style="max-width:82%;">
+          <div style="background:var(--cream-mid);color:var(--brown);padding:14px 18px;border-radius:1.5rem 1.5rem 1.5rem 0.25rem;font-size:15px;line-height:1.65;">${reply.replace(/\n/g,'<br>')}</div>
+          <span style="font-size:11px;color:var(--brown-mid);margin-top:5px;margin-left:10px;display:block;">Luz • ahora</span>
+        </div>
+      </div>`;
+    box.scrollTop = box.scrollHeight;
+  })
+  .catch(() => {
+    document.getElementById(typingId)?.remove();
+    box.innerHTML += `
+      <div style="display:flex;align-items:flex-start;gap:10px;">
+        <div style="width:36px;height:36px;border-radius:50%;background:var(--cream-dark);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">✦</div>
+        <div style="background:var(--cream-mid);padding:14px 18px;border-radius:1.5rem;font-size:14px;color:var(--brown-mid);">Sin conexión. Asegúrate de que el servidor esté activo.</div>
+      </div>`;
+    box.scrollTop = box.scrollHeight;
+  });
+}
 
   // agrega al historial
   chatHistory.push({ role: "user", content: msg });
